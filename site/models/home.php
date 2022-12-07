@@ -4,6 +4,7 @@ use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
 use Kirby\Toolkit\Str;
+use Kirby\Uuid\Uuid;
 
 class HomePage extends Page {
     public function children()
@@ -19,10 +20,7 @@ class HomePage extends Page {
                 'num'      => $key+1,
                 'template' => 'product',
                 'model'    => 'product',
-                'content'  => [
-                    'title' => $product['title'],
-                    'uuid' => $slug,
-                ]
+                'content'  => array_merge($product, ['uuid' => Uuid::generate()])
             ];
         }
 
