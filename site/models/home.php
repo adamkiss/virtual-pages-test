@@ -13,12 +13,16 @@ class HomePage extends Page {
         $products = Data::read(dirname(__DIR__, 2) . '/dummy-products.json', 'json');
 
         foreach ($products['products'] as $key => $product) {
+            $slug = Str::slug($product['title']);
             $pages[] = [
-                'slug'     => Str::slug($product['title']),
+                'slug'     => $slug,
                 'num'      => $key+1,
                 'template' => 'product',
                 'model'    => 'product',
-                'content'  => $product
+                'content'  => [
+                    'title' => $product['title'],
+                    'uuid' => $slug,
+                ]
             ];
         }
 
